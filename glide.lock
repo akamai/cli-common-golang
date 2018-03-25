@@ -1,0 +1,20 @@
+hash: db78f3c54bbe9cb364dd4a77c39b806d13993a5b2a87941f6b6661f2c7205e92
+updated: 2018-03-26T03:55:09.060060257+09:00
+imports:
+- name: github.com/briandowns/spinner
+  version: 48dbb65d7bd5c74ab50d53d04c949f20e3d14944
+- name: github.com/fatih/color
+  version: 507f6050b8568533fb3f5504de8e5205fa62a114
+- name: github.com/mattn/go-colorable
+  version: 5411d3eea5978e6cdc258b30de592b60df6aba96
+- name: github.com/mattn/go-isatty
+  version: 0360b2af4f38e8d38c7fce2a9f4e702702d73a39
+- name: github.com/mitchellh/go-homedir
+  version: b8bc1bf767474819792c23f32d8286a45736f1c6
+- name: github.com/urfave/cli
+  version: cfb38830724cc34fedffe9a2a29fb54fa9169cd1
+- name: golang.org/x/sys
+  version: 9d4e42a20653790449273b3c85e67d6d8bae6e2e
+  subpackages:
+  - unix
+testImports: []
