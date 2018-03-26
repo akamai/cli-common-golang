@@ -38,7 +38,7 @@ var (
 
 type CommandLocator func() ([]cli.Command, error)
 
-func CreateApp(command_name, usage, description, version string, locator CommandLocator) {
+func CreateApp(command_name, usage, description, version string, defaultSection string, locator CommandLocator) {
 	_, in_cli := os.LookupEnv("AKAMAI_CLI")
 
 	app_name := "akamai"
@@ -60,21 +60,23 @@ func CreateApp(command_name, usage, description, version string, locator Command
 	App.ErrWriter = colorable.NewColorableStderr()
 	App.EnableBashCompletion = true
 
-	dir, _ := homedir.Dir()
-	dir += string(os.PathSeparator) + ".edgerc"
-	App.Flags = []cli.Flag{
-		cli.StringFlag{
-			Name:   "edgerc",
-			Usage:  "Location of the credentials file",
-			Value:  dir,
-			EnvVar: "AKAMAI_EDGERC",
-		},
-		cli.StringFlag{
-			Name:   "section",
-			Usage:  "Section of the credentials file",
-			Value:  "ccu",
-			EnvVar: "AKAMAI_EDGERC_SECTION",
-		},
+	if defaultSection != "" {
+		dir, _ := homedir.Dir()
+		dir += string(os.PathSeparator) + ".edgerc"
+		App.Flags = []cli.Flag{
+			cli.StringFlag{
+				Name:   "edgerc",
+				Usage:  "Location of the credentials file",
+				Value:  dir,
+				EnvVar: "AKAMAI_EDGERC",
+			},
+			cli.StringFlag{
+				Name:   "section",
+				Usage:  "Section of the credentials file",
+				Value:  defaultSection,
+				EnvVar: "AKAMAI_EDGERC_SECTION",
+			},
+		}
 	}
 
 	App.BashComplete = DefaultAutoComplete
