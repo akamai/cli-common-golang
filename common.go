@@ -41,9 +41,12 @@ type CommandLocator func() ([]cli.Command, error)
 func CreateApp(command_name, usage, description, version string, locator CommandLocator) {
 	_, in_cli := os.LookupEnv("AKAMAI_CLI")
 
-	app_name := "akamai-" + command_name
-	if in_cli {
-		app_name = "akamai " + command_name
+	app_name := "akamai"
+	if command_name != "" {
+		app_name = "akamai-" + command_name
+		if in_cli {
+			app_name = "akamai " + command_name
+		}
 	}
 
 	App = cli.NewApp()
