@@ -1,10 +1,17 @@
 package: github.com/akamai/cli-common-golang
 import:
+- package: github.com/akamai/AkamaiOPEN-edgegrid-golang
+  version: ^0.6.1
+  subpackages:
+  - edgegrid
 - package: github.com/briandowns/spinner
   version: ^1.0.0
 - package: github.com/fatih/color
   version: ^1.6.0
+- package: github.com/mattn/go-colorable
+  version: ^0.0.9
 - package: github.com/mattn/go-isatty
   version: ^0.0.3
+- package: github.com/mitchellh/go-homedir
 - package: github.com/urfave/cli
   version: ^1.20.0

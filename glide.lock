@@ -1,16 +1,26 @@
-hash: db78f3c54bbe9cb364dd4a77c39b806d13993a5b2a87941f6b6661f2c7205e92
-updated: 2018-03-26T03:55:09.060060257+09:00
+hash: 245f81dd79f8673c2455a25ba2b095fbdfdbda12498beb49847d0c1ba1715ac0
+updated: 2018-04-08T22:07:08.036888334-07:00
 imports:
+- name: github.com/akamai/AkamaiOPEN-edgegrid-golang
+  version: ad4ccb93655438d71a42f1aec7e58f9d2444b858
+  subpackages:
+  - edgegrid
 - name: github.com/briandowns/spinner
   version: 48dbb65d7bd5c74ab50d53d04c949f20e3d14944
 - name: github.com/fatih/color
   version: 507f6050b8568533fb3f5504de8e5205fa62a114
+- name: github.com/go-ini/ini
+  version: 5e9692864e22d02ac79e2fa499cffb00520b4fea
+- name: github.com/google/uuid
+  version: 064e2069ce9c359c118179501254f67d7d37ba24
 - name: github.com/mattn/go-colorable
-  version: 5411d3eea5978e6cdc258b30de592b60df6aba96
+  version: 167de6bfdfba052fa6b2d3664c8f5272e23c9072
 - name: github.com/mattn/go-isatty
   version: 0360b2af4f38e8d38c7fce2a9f4e702702d73a39
 - name: github.com/mitchellh/go-homedir
   version: b8bc1bf767474819792c23f32d8286a45736f1c6
+- name: github.com/sirupsen/logrus
+  version: 3ec0642a7fb6488f65b06f9040adc67e3990296a
 - name: github.com/urfave/cli
   version: cfb38830724cc34fedffe9a2a29fb54fa9169cd1
 - name: golang.org/x/sys
