@@ -310,7 +310,7 @@ func setHelpTemplates() {
 
 		"{{if .VisibleFlags}}" +
 		color.YellowString("Flags: \n") +
-		"{{range .VisibleFlags}}   {{.}}\n\n{{end}}{{end}}" +
+		"{{range .VisibleFlags}}   {{.}}\n{{end}}{{end}}" +
 
 		"{{if .UsageText}}{{.UsageText}}\n{{end}}"
 
