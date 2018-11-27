@@ -20,7 +20,6 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/akamai/AkamaiOPEN-edgegrid-golang/edgegrid"
 	spnr "github.com/briandowns/spinner"
@@ -107,66 +106,20 @@ func CreateApp(command_name, usage, description, version string, defaultSection 
 	setHelpTemplates()
 }
 
-func StartSpinner(prefix string, finalMsg string) *spnr.Spinner {
-	spinner = spnr.New(spnr.CharSets[26], 500*time.Millisecond)
-	spinner.Writer = App.ErrWriter
-	spinner.Prefix = prefix
-	spinner.FinalMSG = finalMsg
-	spinner.Start()
-
-	return spinner
-}
-
-func StopSpinner(finalMsg string, usePrefix bool) {
-	if spinner == nil {
-		return
-	}
-	if usePrefix {
-		spinner.FinalMSG = spinner.Prefix + finalMsg
-	} else {
-		spinner.FinalMSG = finalMsg
-	}
-	spinner.Stop()
-}
-
-func StopSpinnerOk() {
-	if spinner == nil {
-		return
-	}
-	spinner.FinalMSG = spinner.Prefix + fmt.Sprintf("... [%s]\n", color.GreenString("OK"))
-	spinner.Stop()
-}
-
-func StopSpinnerWarnOk() {
-	if spinner == nil {
-		return
-	}
-	spinner.FinalMSG = spinner.Prefix + fmt.Sprintf("... [%s]\n", color.CyanString("OK"))
-	spinner.Stop()
-}
-
-func StopSpinnerWarn() {
-	if spinner == nil {
-		return
-	}
-	spinner.FinalMSG = spinner.Prefix + fmt.Sprintf("... [%s]\n", color.CyanString("WARN"))
-	spinner.Stop()
-}
-
-func StopSpinnerFail() {
-	if spinner == nil {
-		return
-	}
-	spinner.FinalMSG = spinner.Prefix + fmt.Sprintf("... [%s]\n", color.RedString("FAIL"))
-	spinner.Stop()
-}
-
 func IsInteractive(c *cli.Context) bool {
-	if !isatty.IsTerminal(os.Stdout.Fd()) && !isatty.IsCygwinTerminal(os.Stdout.Fd()) {
+	if !isTTY() {
 		return false
 	}
 
 	if c != nil && c.IsSet("non-interactive") && c.Bool("non-interactive") {
+		return false
+	}
+
+	return true
+}
+
+func isTTY() bool {
+	if !isatty.IsTerminal(os.Stdout.Fd()) && !isatty.IsCygwinTerminal(os.Stdout.Fd()) {
 		return false
 	}
 
