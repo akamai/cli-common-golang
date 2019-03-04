@@ -55,5 +55,5 @@ func CmdList(c *cli.Context) {
 		}
 	}
 
-	fmt.Printf("\nSee \"%s\" for details.\n", color.BlueString("%s help [command]", "akamai dns"))
+	fmt.Printf("\nSee \"%s\" for details.\n", color.BlueString("%s help [command]", c.App.Name))
 }
