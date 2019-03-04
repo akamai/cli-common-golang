@@ -22,25 +22,25 @@ import (
 )
 
 type Config struct {
-	path  string
-	ini   *ini.File
+	Path  string
+	Ini   *ini.File
 	dirty bool
 }
 
 func NewConfig(path string) (config *Config, err error) {
-	config = &Config{path: path}
+	config = &Config{Path: path}
 	if _, err = os.Stat(path); os.IsNotExist(err) {
-		config.ini = ini.Empty()
+		config.Ini = ini.Empty()
 		return
 	}
 
-	config.ini, err = ini.Load(path)
+	config.Ini, err = ini.Load(path)
 	return
 }
 
 func (c *Config) Save() error {
 	if c.dirty {
-		err := c.ini.SaveTo(c.path)
+		err := c.Ini.SaveTo(c.Path)
 		c.dirty = false
 		return err
 	}
@@ -48,7 +48,7 @@ func (c *Config) Save() error {
 }
 
 func (c *Config) Get(sectionName string, keyName string) string {
-	section := c.ini.Section(sectionName)
+	section := c.Ini.Section(sectionName)
 	key := section.Key(keyName)
 	if key != nil {
 		return key.String()
@@ -58,23 +58,23 @@ func (c *Config) Get(sectionName string, keyName string) string {
 }
 
 func (c *Config) Set(sectionName string, key string, value string) {
-	section := c.ini.Section(sectionName)
+	section := c.Ini.Section(sectionName)
 	section.Key(key).SetValue(value)
 	c.dirty = true
 }
 
 func (c *Config) Unset(sectionName string, key string) {
-	section := c.ini.Section(sectionName)
+	section := c.Ini.Section(sectionName)
 	section.DeleteKey(key)
 	c.dirty = true
 }
 
 func (c *Config) GetIni() *ini.File {
-	return c.ini
+	return c.Ini
 }
 
 func (c *Config) ExportEnv() {
-	for _, section := range c.ini.Sections() {
+	for _, section := range c.Ini.Sections() {
 		for _, key := range section.Keys() {
 			envVar := "AKAMAI_" + strings.ToUpper(section.Name()) + "_"
 			envVar += strings.ToUpper(strings.Replace(key.Name(), "-", "_", -1))
