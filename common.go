@@ -75,6 +75,10 @@ func CreateApp(command_name, usage, description, version string, defaultSection 
 				Value:  defaultSection,
 				EnvVar: "AKAMAI_EDGERC_SECTION",
 			},
+			cli.StringFlag{
+				Name:   "accountkey",
+				Usage:  "Account switch key",
+			},
 		}
 	}
 
@@ -194,6 +198,10 @@ func GetEdgegridConfig(c *cli.Context) (edgegrid.Config, error) {
 	config, err := edgegrid.Init(c.GlobalString("edgerc"), c.GlobalString("section"))
 	if err != nil {
 		return edgegrid.Config{}, cli.NewExitError(err.Error(), 1)
+	}
+
+	if len(c.GlobalString("accountkey")) > 0 {
+		config.AccountKey = c.GlobalString("accountkey")
 	}
 
 	return config, nil
