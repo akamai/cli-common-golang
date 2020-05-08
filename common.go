@@ -78,6 +78,7 @@ func CreateApp(command_name, usage, description, version string, defaultSection 
 			cli.StringFlag{
 				Name:   "accountkey",
 				Usage:  "Account switch key",
+				EnvVar: "AKAMAI_EDGERC_ACCOUNT_KEY",
 			},
 		}
 	}
